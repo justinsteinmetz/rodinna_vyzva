@@ -7,30 +7,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-  --black:      #0d0a08;
-  --dark:       #141008;
-  --card:       #1a1410;
-  --paper:      #f0e6ce;
-  --paper-dark: #d4bc8a;
-  --paper-aged: #b8966a;
-  --ink:        #1a1208;
-  --red:        #8b1a1a;
-  --red-lt:     #b02020;
-  --red-pale:   #c73030;
-  --gold:       #b8860b;
-  --gold-lt:    #d4a017;
-  --gold-pale:  #e8c547;
-  --cream:      #f8f0dc;
-  --grey:       #6a5a4a;
+  --black:      #0d0800;
+  --dark:       #1a0f00;
+  --card:       #2a1a08;
+  --paper:      #f5e6c8;
+  --paper-dark: #d4b87a;
+  --paper-aged: #a8845a;
+  --ink:        #1a0f00;
+  --red:        #c8780a;
+  --red-lt:     #e8940c;
+  --red-pale:   #f0a820;
+  --gold:       #c8780a;
+  --gold-lt:    #e8940c;
+  --gold-pale:  #f5d060;
+  --cream:      #fdf4e0;
+  --grey:       #7a6a4a;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
 body {
-  background: var(--black);
+  background: #0d0800;
   background-image:
-    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(139,26,26,0.03) 3px, rgba(139,26,26,0.03) 6px),
-    repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.04) 3px, rgba(0,0,0,0.04) 6px);
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(200,120,10,0.04) 3px, rgba(200,120,10,0.04) 6px),
+    repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,0.05) 3px, rgba(0,0,0,0.05) 6px);
   min-height: 100vh;
   padding: 12px;
   font-family: 'IM Fell English', Georgia, serif;
@@ -49,8 +49,8 @@ body::after {
 .poster {
   background: var(--paper);
   background-image:
-    radial-gradient(ellipse at 15% 8%, rgba(255,230,160,0.35) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 92%, rgba(139,26,26,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 15% 8%, rgba(255,220,140,0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 92%, rgba(42,26,8,0.2) 0%, transparent 50%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='turbulence' baseFrequency='0.012' numOctaves='5' seed='7' stitchTiles='stitch'/%3E%3CfeDisplacementMap in='SourceGraphic' scale='4'/%3E%3C/filter%3E%3Crect width='400' height='400' fill='%23f0e6ce' filter='url(%23p)'/%3E%3C/svg%3E");
   max-width: 480px;
   margin: 0 auto;
@@ -161,8 +161,8 @@ body::after {
 
 /* SCORE BAND */
 .score-band {
-  background: var(--red);
-  background-image: linear-gradient(135deg, var(--red) 0%, #6a1010 100%);
+  background: var(--dark);
+  background-image: linear-gradient(135deg, #2a1a08 0%, #0d0800 100%);
   margin: 0 -16px;
   padding: 8px 20px;
   display: flex;
@@ -425,8 +425,8 @@ body::after {
   text-align: center;
   padding: 16px;
   margin: 10px -16px -4px;
-  background: var(--red);
-  background-image: linear-gradient(135deg, var(--red) 0%, #6a1010 100%);
+  background: var(--dark);
+  background-image: linear-gradient(135deg, #2a1a08 0%, #0d0800 100%);
   border-top: 2px solid var(--gold);
   border-bottom: 2px solid var(--gold);
 }
@@ -485,7 +485,7 @@ body::after {
 .wax-seal {
   width: 52px;
   height: 52px;
-  background: radial-gradient(circle at 40% 35%, #1a1a1a, var(--black));
+  background: radial-gradient(circle at 40% 35%, #3a2010, #1a0f00);
   border-radius: 50%;
   margin: 10px auto 0;
   display: flex;
@@ -525,7 +525,7 @@ body::after {
             <div class="progress-count" id="progressCount">0 / 20</div>
           </div>
           <div class="score-right">
-            <div class="score-value">30</div>
+            <div class="score-value">50</div>
             <div class="score-caption">Points Total</div>
           </div>
         </div>
@@ -570,19 +570,29 @@ const TASKS = [
   { id:5,  text:"Take a photo hanging out with Sigmund Freud.", type:"photo", pts:1 },
   { id:6,  text:"Film your family singing a song — loud and proud — on <em>Karlův most</em>.", type:"film", pts:2 },
   { id:7,  text:"Get a photo with a guard in front of <em>Pražský hrad</em>.", type:"photo", pts:1 },
-  { id:8,  text:"Take a photo of the view from \u2018Stalin\u2019.", type:"find", pts:1 },
+  { id:8,  text:"Climb to “Stalin” and strike your most triumphant pose. Take a family photo.", type:"find", pts:1 },
   { id:9,  text:"Film statues of men peeing on the Czech Republic.", type:"film", pts:2 },
-  { id:10, text:"Take a family photo with an 800kg baby.", type:"find", pts:1 },
-  { id:11, text:"Teach a stranger something in your family\u2019s language. Film it.", type:"interact", pts:2 },
+  { id:10, text:"Take a family photo with an 800 kg baby.", type:"find", pts:1 },
+  { id:11, text:"Teach a stranger something in your family’s language. Film it.", type:"interact", pts:2 },
   { id:12, text:"Add something to the John Lennon Wall — then take a photo of your family with your contribution.", type:"photo", pts:1 },
   { id:13, text:"Take a family photo under a dead horse.", type:"find", pts:1 },
   { id:14, text:"Ask a peacock for a feather. In Czech. Film it.", type:"interact", pts:2 },
   { id:15, text:"Take a photo with a nutria.", type:"photo", pts:2 },
-  { id:16, text:"Ride the funicular to <em>Petřín</em> and film your family saying: \u201c<em>Dosáhli jsme vrcholu.</em>\u201d", type:"film", pts:2 },
+  { id:16, text:"Ride the funicular to <em>Petřín</em> and film your family saying, “<em>Dosáhli jsme vrcholu.</em>”", type:"film", pts:2 },
   { id:17, text:"Find <em>Hlava Franze Kafky</em> and film your family slowly turning like the sculpture.", type:"film", pts:2 },
   { id:18, text:"Find the narrowest street in Prague and take a whole family selfie.", type:"find", pts:1 },
   { id:19, text:"Reenact the defenestration. Film it.", type:"film", pts:2 },
-  { id:20, text:"\u201cBorn from river clay, yet sleeping beneath sacred beams.\u201d Find where it rests. Take a family photo outside.", type:"find", pts:1 },
+  { id:20, text:"“Born from river clay, yet sleeping beneath sacred beams.” Find where it rests. Take a family photo outside.", type:"find", pts:2 },
+  { id:21, text:"Beneath <em>Vyšehrad</em>, at Duke Krok’s table, a candle gives no light — only cream, cranberries, and dumplings. Find it, taste it, and take a family photo.", type:"find", pts:2 },
+  { id:22, text:"Find Duke Krok’s most famous daughter and her lover, standing where she spoke Prague into existence. Take a family photo with them.", type:"find", pts:2 },
+  { id:23, text:"Find <em>Černá Madona</em> and take a family photo while eating something square.", type:"find", pts:1 },
+  { id:24, text:"Count the steps at <em>Petřínská rozhledna</em>. At the top, film your family showing the total with your hands. Good luck.", type:"film", pts:2 },
+  { id:25, text:"Somewhere in Holešovice, a Zeppelin is waiting. Find it. Take a family photo inside.", type:"find", pts:2 },
+  { id:26, text:"Dance with the Dancing House. Film it.", type:"film", pts:2 },
+  { id:27, text:"Take a photo of <em>Hradčany</em> from a <em>bílá labuť</em> on the <em>Vltava</em>.", type:"photo", pts:1 },
+  { id:28, text:"Order a <em>smažák</em> in Czech at a <em>Lokál</em>. Take a family photo before the first bite.", type:"interact", pts:2 },
+  { id:29, text:"Take a photo of the room where Kafka and Einstein played billiards. Reward yourselves with dessert and coffee.", type:"find", pts:2 },
+  { id:30, text:"When evening falls, Prague turns to gold. Find the best seat in <em>Riegrovy sady</em> and watch the city glow. Take one final family photo.", type:"find", pts:3 },
 ];
 
 const LABELS = { film:"Film", photo:"Photo", find:"Find", interact:"Interact" };
@@ -594,12 +604,12 @@ function score() { return TASKS.reduce((a,t)=>state.done[t.id]?a+t.pts:a,0); }
 function count() { return Object.values(state.done).filter(Boolean).length; }
 
 function updateHeader() {
-  const c=count(), s=score(), pct=Math.round(c/20*100);
+  const c=count(), s=score(), pct=Math.round(c/30*100);
   document.getElementById('scoreDisplay').textContent = s;
   document.getElementById('progressFill').style.width = pct+'%';
-  document.getElementById('progressCount').textContent = c+' / 20';
+  document.getElementById('progressCount').textContent = c+' / 30';
   const banner=document.getElementById('completionBanner');
-  if(c===20){
+  if(c===30){
     banner.classList.add('visible');
     const t=state.team||'Your family';
     document.getElementById('completionSub').textContent=`${t} · ${s} points`;
