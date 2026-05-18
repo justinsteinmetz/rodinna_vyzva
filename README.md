@@ -44,6 +44,4 @@ Fonts loaded from Google Fonts (Cinzel, IM Fell English, Playfair Display) — r
 
 Designed for mobile (phone-first). Functions on desktop but the experience is optimised for a screen you carry.
 
-## Deployment
 
-Drop the HTML file in any static hosting environment. GitHub Pages works fine — rename to `index.html` or link directly.
