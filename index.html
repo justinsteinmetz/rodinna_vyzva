@@ -669,27 +669,46 @@ function init(){
   load();
   const inp=document.getElementById('teamName');
   inp.value=state.team||'';
-  function updateNameplate() {
+  function showNameplate() {
     const val = inp.value.trim();
     const label = document.getElementById('teamLabel');
     const nameplate = document.getElementById('teamNameplate');
-    const inp_el = document.getElementById('teamName');
     if (val) {
       label.style.display = 'none';
-      inp_el.style.display = 'none';
+      inp.style.display = 'none';
       nameplate.textContent = val;
       nameplate.classList.add('visible');
-    } else {
-      label.style.display = '';
-      inp_el.style.display = '';
-      nameplate.classList.remove('visible');
     }
   }
 
-  inp.addEventListener('input',()=>{state.team=inp.value;save();updateNameplate();});
-  updateNameplate();
+  function showInput() {
+    const label = document.getElementById('teamLabel');
+    const nameplate = document.getElementById('teamNameplate');
+    label.style.display = '';
+    inp.style.display = '';
+    nameplate.classList.remove('visible');
+    inp.focus();
+  }
+
+  // Show nameplate on blur if name entered
+  inp.addEventListener('blur', () => { if(inp.value.trim()) showNameplate(); });
+  inp.addEventListener('input',()=>{ state.team=inp.value; save(); });
+
+  // Tap nameplate to edit again
+  document.getElementById('teamNameplate').addEventListener('click', showInput);
+
+  // On load, show nameplate if name already saved
+  if (state.team) { inp.value = state.team; showNameplate(); }
   document.getElementById('resetBtn').addEventListener('click',()=>{
-    if(confirm('Reset all progress for this family?')){state.done={};save();render();updateHeader();}
+    if(confirm('Reset all progress for this family?')){
+      state.done={};
+      state.team='';
+      inp.value='';
+      save();
+      showInput();
+      render();
+      updateHeader();
+    }
   });
   render(); updateHeader();
 }
