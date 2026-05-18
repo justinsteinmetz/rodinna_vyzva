@@ -228,6 +228,21 @@ body::after {
   border-bottom: 1px solid var(--paper-aged);
 }
 
+.team-nameplate {
+  display: none;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--ink);
+  letter-spacing: 0.08em;
+  text-align: center;
+  padding: 6px 0;
+}
+
+.team-nameplate.visible {
+  display: block;
+}
+
 .team-label {
   font-family: 'Cinzel', serif;
   font-size: 0.55rem;
@@ -532,8 +547,9 @@ body::after {
 
         <!-- FAMILY NAME -->
         <div class="team-section">
-          <div class="team-label">Family Name</div>
-          <div class="team-row">
+          <div class="team-label" id="teamLabel">Family Name</div>
+          <div class="team-nameplate" id="teamNameplate"></div>
+          <div class="team-row" id="teamRow">
             <input class="team-input" id="teamName" type="text" placeholder="Enter your family name…" maxlength="30" autocomplete="off" spellcheck="false">
             <button class="btn-reset" id="resetBtn">Reset</button>
           </div>
@@ -653,7 +669,25 @@ function init(){
   load();
   const inp=document.getElementById('teamName');
   inp.value=state.team||'';
-  inp.addEventListener('input',()=>{state.team=inp.value;save();});
+  function updateNameplate() {
+    const val = inp.value.trim();
+    const label = document.getElementById('teamLabel');
+    const nameplate = document.getElementById('teamNameplate');
+    const inp_el = document.getElementById('teamName');
+    if (val) {
+      label.style.display = 'none';
+      inp_el.style.display = 'none';
+      nameplate.textContent = val;
+      nameplate.classList.add('visible');
+    } else {
+      label.style.display = '';
+      inp_el.style.display = '';
+      nameplate.classList.remove('visible');
+    }
+  }
+
+  inp.addEventListener('input',()=>{state.team=inp.value;save();updateNameplate();});
+  updateNameplate();
   document.getElementById('resetBtn').addEventListener('click',()=>{
     if(confirm('Reset all progress for this family?')){state.done={};save();render();updateHeader();}
   });
