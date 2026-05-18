@@ -688,27 +688,34 @@ function init(){
     inp.style.display = '';
     nameplate.classList.remove('visible');
     inp.focus();
-    updateResetBtn();
+    setResetBtn('enter');
   }
 
-  function updateResetBtn() {
+  function setResetBtn(mode) {
     const btn = document.getElementById('resetBtn');
-    btn.textContent = inp.value.trim() ? 'Reset' : 'Enter';
+    btn.textContent = mode === 'reset' ? 'Reset' : 'Enter';
   }
 
-  // Show nameplate on blur if name entered
-  inp.addEventListener('blur', () => { if(inp.value.trim()) showNameplate(); });
-  inp.addEventListener('input',()=>{ state.team=inp.value; save(); updateResetBtn(); });
+  function confirmName() {
+    if (inp.value.trim()) {
+      showNameplate();
+      setResetBtn('reset');
+    }
+  }
+
+  // Save as they type but don't change button
+  inp.addEventListener('input',()=>{ state.team=inp.value; save(); });
   
-  // Also allow Enter key to confirm
-  inp.addEventListener('keydown', (e) => { if(e.key==='Enter' && inp.value.trim()) { inp.blur(); } });
+  // Confirm on blur or Enter key
+  inp.addEventListener('blur', confirmName);
+  inp.addEventListener('keydown', (e) => { if(e.key==='Enter') { inp.blur(); } });
 
   // Tap nameplate to edit again
   document.getElementById('teamNameplate').addEventListener('click', showInput);
 
   // On load, show nameplate if name already saved
-  updateResetBtn();
-  if (state.team) { inp.value = state.team; showNameplate(); }
+  setResetBtn('enter');
+  if (state.team) { inp.value = state.team; showNameplate(); setResetBtn('reset'); }
   document.getElementById('resetBtn').addEventListener('click',()=>{
     if(confirm('Reset all progress for this family?')){
       state.done={};
@@ -716,7 +723,6 @@ function init(){
       inp.value='';
       save();
       showInput();
-      updateResetBtn();
       render();
       updateHeader();
     }
